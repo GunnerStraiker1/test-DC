@@ -8,6 +8,15 @@ function getCourses(req, res, cn) {
     })
 }
 
+function getCourseById(req, res, cn) {
+    var courseId = req.params.courseId;
+    var sql = "SELECT * FROM courses WHERE id = " + courseId;
+    cn.query(sql, (err, rows) =>{
+        if (err) throw err
+        res.send(rows);
+    })
+}
+
 function createCourse(req, res, cn) {
     var dataRequest = req.body;
     var sql = "INSERT INTO  courses SET ?";
@@ -37,6 +46,7 @@ function deleteCourse(req, res, cn) {
 
 module.exports = {
     getCourses,
+    getCourseById,
     createCourse,
     updateCourse,
     deleteCourse,
